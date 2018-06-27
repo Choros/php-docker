@@ -1,5 +1,7 @@
 # Alpine Docker PHP
 
+[![Docker Repository on Quay](https://quay.io/repository/choros/php-docker/status "Docker Repository on Quay")](https://quay.io/repository/choros/php-docker)
+
 PHP Docker image base on Alpine Linux
 
 ## Set timezone
