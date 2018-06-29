@@ -40,8 +40,8 @@ COPY conf/ /opt/docker/
 
 ENV PHP_EXTRA_CONFIGURE_ARGS --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --enable-sockets
 
-ENV PHP_VERSION 7.2.7
-ENV PHP_URL="https://secure.php.net/get/php-7.2.7.tar.xz/from/this/mirror"
+ENV PHP_VERSION 7.1.19
+ENV PHP_URL="https://secure.php.net/get/php-7.1.19.tar.xz/from/this/mirror"
 
 COPY docker-php-source /usr/local/bin/
 

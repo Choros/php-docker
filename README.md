@@ -7,7 +7,7 @@ PHP Docker image base on Alpine Linux
 ## How to use
 ##### In Dockerfile
 ```dockerfile
-FROM quay.io/choros/php-docker:7.2
+FROM quay.io/choros/php-docker:7.1
 ```
 
 ## Set timezone
@@ -32,7 +32,7 @@ We provide the helper scripts `docker-php-ext-configure`, `docker-php-ext-instal
 In order to keep the images smaller, PHP's source is kept in a compressed tar file. To facilitate linking of PHP's source with any extension, we also provide the helper script `docker-php-source` to easily extract the tar or delete the extracted source. Note: if you do use `docker-php-source` to extract the source, be sure to delete it in the same layer of the docker image.
 
 ```Dockerfile
-FROM quay.io/choros/php-docker:7.2
+FROM quay.io/choros/php-docker:7.1
 RUN docker-php-source download \
     && docker-php-source extract \
 	# do important things \
@@ -44,7 +44,7 @@ RUN docker-php-source download \
 For example, if you want to have a PHP-FPM image with `iconv`, `mcrypt` and `gd` extensions, you can inherit the base image that you like, and write your own `Dockerfile` like this:
 
 ```dockerfile
-FROM quay.io/choros/php-docker:7.2
+FROM quay.io/choros/php-docker:7.1
 RUN apt-get update && apt-get install -y \
 		libfreetype6-dev \
 		libjpeg62-turbo-dev \
@@ -65,14 +65,14 @@ See ["Dockerizing Compiled Software"](https://tianon.xyz/post/2017/12/26/dockeri
 Some extensions are not provided with the PHP source, but are instead available through [PECL](https://pecl.php.net/). To install a PECL extension, use `pecl install` to download and compile it, then use `docker-php-ext-enable` to enable it:
 
 ```dockerfile
-FROM quay.io/choros/php-docker:7.2
+FROM quay.io/choros/php-docker:7.1
 RUN pecl install redis-4.0.1 \
 	&& pecl install xdebug-2.6.0 \
 	&& docker-php-ext-enable redis xdebug
 ```
 
 ```dockerfile
-FROM quay.io/choros/php-docker:7.2
+FROM quay.io/choros/php-docker:7.1
 RUN apt-get update && apt-get install -y libmemcached-dev zlib1g-dev \
 	&& pecl install memcached-2.2.0 \
 	&& docker-php-ext-enable memcached
@@ -93,7 +93,7 @@ For example, `pecl install memcached-2.2.0 && pecl install redis-2.2.8` instead 
 Some extensions are not provided via either Core or PECL; these can be installed too, although the process is less automated:
 
 ```dockerfile
-FROM quay.io/choros/php-docker:7.2
+FROM quay.io/choros/php-docker:7.1
 RUN curl -fsSL 'https://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz' -o xcache.tar.gz \
 	&& mkdir -p xcache \
 	&& tar -xf xcache.tar.gz -C xcache --strip-components=1 \
@@ -112,7 +112,7 @@ RUN curl -fsSL 'https://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.
 The `docker-php-ext-*` scripts *can* accept an arbitrary path, but it must be absolute (to disambiguate from built-in extension names), so the above example could also be written as the following:
 
 ```dockerfile
-FROM quay.io/choros/php-docker:7.2
+FROM quay.io/choros/php-docker:7.1
 RUN docker-php-source download \
     && curl -fsSL 'https://xcache.lighttpd.net/pub/Releases/3.2.0/xcache-3.2.0.tar.gz' -o xcache.tar.gz \
 	&& mkdir -p /tmp/xcache \
